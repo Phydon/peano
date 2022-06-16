@@ -51,3 +51,35 @@ fn add_to_set(set: &mut BTreeSet<u64>, n: Element<u64>) {
     let num = n.value;
     set.insert(num);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_successor() {
+        let a = Element{
+            value: 123,
+        };
+
+        assert_eq!(a.successor(), 124);
+    }
+
+    #[test]
+    fn test_next_value() {
+        let a = Element{
+            value: 234,
+        };
+        let b = Element{
+            value: 235,
+        };
+
+        assert_eq!(a.next_value(), b);
+    }
+
+    #[test]
+    #[should_panic(expected = "explicit panic")]
+    fn test_panic() {
+        panic!();
+    }
+}
