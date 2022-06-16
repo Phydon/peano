@@ -1,17 +1,17 @@
 use std::collections::BTreeSet;
 
-#[derive(Debug)]
-struct NaturalNumber {
-    value: u64,
+#[derive(Debug, PartialEq, Clone)]
+struct Element<T> {
+    value: T,
 }
 
-impl NaturalNumber {
+impl Element<u64> {
     fn successor(&self) -> u64 {
         self.value + 1
     }
 
-    fn next_value(&self) -> NaturalNumber {
-        let next = NaturalNumber{
+    fn next_value(&self) -> Element<u64> {
+        let next = Element{
             value: self.successor(),
         };
 
@@ -20,13 +20,13 @@ impl NaturalNumber {
 }
 
 fn main() {
-    let zero = NaturalNumber{
+    let zero = Element{
         value: 0,
     };
     println!("{}", zero.value);
 
     for i in 0..=9 {
-        let n = NaturalNumber{
+        let n = Element{
             value: zero.value + i,
         };
 
@@ -34,11 +34,20 @@ fn main() {
         println!("{next_number}");
     }
 
-    for i in 0..9 {
-        let n = NaturalNumber{
+    let mut set: BTreeSet<u64> = BTreeSet::new();
+
+    for i in 0..10 {
+        let n = Element{
             value: i,
         };
         let result = n.next_value();
-        dbg!(result);
+        add_to_set(&mut set, result);
     }
+
+    println!("{:?}", set);
+}
+
+fn add_to_set(set: &mut BTreeSet<u64>, n: Element<u64>) {
+    let num = n.value;
+    set.insert(num);
 }
