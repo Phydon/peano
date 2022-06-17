@@ -1,6 +1,6 @@
 use std::collections::BTreeSet;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq)]
 struct Element<T> {
     value: T,
 }
@@ -15,7 +15,7 @@ impl Element<u64> {
             value: self.successor(),
         };
 
-        return next;
+        next
     }
 }
 
